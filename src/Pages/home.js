@@ -1,5 +1,6 @@
 import React from 'react';
-import { Paper, Grid, Typography, Button, List, makeStyles } from '@material-ui/core/';
+import { connect } from 'react-redux';
+import { Paper, Grid, Typography, List, makeStyles } from '@material-ui/core/';
 import Item from '../components/Item';
 import Card from '../components/Card';
 
@@ -14,7 +15,9 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const HomePage = () => {
+const HomePage = ({ products }) => {
+    console.log(products);
+
     const classes = useStyles();
 
     return(
@@ -41,15 +44,20 @@ const HomePage = () => {
                 </Paper>
             </Grid>
             <Grid container xs={9} spacing={3} className={classes.root}>
-                <Card name="Flamengo 2020" price="99.00" image="./images/produtos/fla.jpg">
-                    Flamengo
-                </Card>
-                <Card name="Arsenal 2020" price="99.00" image="./images/produtos/arsenal.jpg">
-                    Arsenal
-                </Card>
+                {products.map(item => {
+                    return(
+                        <Card key={item.id_product} name={item.name_product} price={item.price} image={item.image}>
+                            {item.name_product}
+                        </Card>
+                    )
+                })}
             </Grid>
         </Grid>
     )
 }
 
-export default HomePage;
+const mapStateToProps = state => ({
+    products: state.products 
+})
+
+export default connect(mapStateToProps)(HomePage);
