@@ -6,6 +6,13 @@ import { Container } from '@material-ui/core/';
 import Header from './components/Header';
 
 const App = () => {
+  
+  const localCart = JSON.parse(localStorage.getItem('dioshopping: cart'))
+  
+  if(localCart !== null) {
+    store.dispatch({type: 'CHANGE_CART', localCart})
+  }
+  
   return(
     <Provider store={store}>
       <Container maxWidth="xl">

@@ -25,7 +25,7 @@ const Card = ({ product, children }) => {
                         {children}
                     </Typography>
                     <Typography variant='subtitle1'>
-                        R$ {product.price}
+                        R$ {product.price.toFixed(2)}
                     </Typography>
                     </Grid>
                 
